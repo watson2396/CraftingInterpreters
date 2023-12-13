@@ -1,12 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace csharp_lox;
 
 class Program
 {
-    static void Main(string[] args)
-    {
+    public static void Main(string[] args) {
         if (args.Length > 1) {
             Console.WriteLine("Usage: c-sharp_lox [script]");
         } else if (args.Length == 1) {
@@ -16,9 +16,13 @@ class Program
         }
     }
 
-    private static void runFile(string filePath) {
-        byte[] bytes = File.ReadAllBytes(Path.GetFullPath(filePath));
-        Task.Run(() => System.Text.Encoding.Default.GetString(bytes));
+    private static void runFile(string path) {
+        char[] chars;
+        using (StreamReader reader = File.OpenText(Path.GetFullPath(path)) ) {
+            chars = new char[reader.BaseStream.Length];
+            string str = new string(chars);
+            Task.Run(() => str);
+        }
     }
 
     private static void runPrompt() {
@@ -32,7 +36,7 @@ class Program
     }
 
     private static void run(string source) {
-
+        
     }
 
 }

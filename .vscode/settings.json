@@ -1,0 +1,5 @@
+{
+    "files.associations": {
+        "compile_time_macros.h": "c"
+    }
+}
