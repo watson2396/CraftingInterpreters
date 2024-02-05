@@ -6,7 +6,9 @@ namespace csharp_lox;
 
 class Program
 {
-    public static void Main(string[] args) {
+    static bool hadError = false;
+
+    public static int Main(string[] args) {
         if (args.Length > 1) {
             Console.WriteLine("Usage: c-sharp_lox [script]");
         } else if (args.Length == 1) {
@@ -14,6 +16,8 @@ class Program
         } else {
             runPrompt();
         }
+        if (hadError) { return 65; }
+        return 0;
     }
 
     private static void runFile(string path) {
@@ -31,12 +35,26 @@ class Program
             string? line = Console.ReadLine();
             if (line == null) break;
             run(line);
+            hadError = false;
         }
 
     }
 
     private static void run(string source) {
-        
+        List<string> tokens = source.Split(' ').ToList();
+
+
+        foreach (string token in tokens) {
+            Console.WriteLine($"{token}");
+        }
     }
 
+    public static void error (int line,  string message) {
+        report(line, "", message);
+    }
+
+    private static void report (int line, string where, string message) {
+        Console.WriteLine($"[line {line}] Error {where}: {message}");
+        hadError = true;
+    }
 }
