@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using static csharp_lox.TokenType;
 using static csharp_lox.Token;
 using System.Text.RegularExpressions;
-
+using System.Diagnostics.Tracing;
 
 namespace csharp_lox;
 public class Scanner {
@@ -15,9 +15,26 @@ public class Scanner {
     private int start = 0;
     private int current = 0;
     private int line = 1;
+    Dictionary<string, TokenType> keywords = new Dictionary<string, TokenType>();
 
     Scanner(string source) {
         this.source = source;
+        keywords.Add("and", AND);
+        keywords.Add("class", CLASS);
+        keywords.Add("else", ELSE);
+        keywords.Add("false", FALSE);
+        keywords.Add("for", FOR);
+        keywords.Add("fun", FUN);
+        keywords.Add("if", IF);
+        keywords.Add("nil", NIL);
+        keywords.Add("or", OR);
+        keywords.Add("print", PRINT);
+        keywords.Add("return", RETURN);
+        keywords.Add("super", SUPER);
+        keywords.Add("this", THIS);
+        keywords.Add("true", TRUE);
+        keywords.Add("var", VAR);
+        keywords.Add("while", WHILE);
     }
 
     public List<Token> ScanTokens() {
@@ -72,9 +89,29 @@ public class Scanner {
                 break;
             case '"': m_string(); break;
             default:
-                csharp_lox.Program.error(line, "unexpected character.");
+                if (isDigit(c)) {
+                    m_number();
+                } else if (isAlpha(c)) {
+                    m_identifier();
+                } else {
+                    csharp_lox.Program.error(line, "unexpected character.");
+                }
                 break;
         }
+    }
+
+    private void m_number() {
+        while (isDigit(peek())) Advance();
+
+        // Look for a fractional part
+        if (peek() == '.' && isDigit(peekNext())) {
+            // Consume the "."
+            Advance();
+
+            while (isDigit(peek())) Advance();
+        }
+
+        AddToken(NUMBER, Double.Parse(source.Substring(start, current)));
     }
 
     private void m_string() {
@@ -110,16 +147,45 @@ public class Scanner {
         return source[current];
     }
 
+    private char peekNext() {
+        if (current + 1 >= source.Length) return '\0';
+        return source[current + 1];
+    }
+
+    private bool isAlpha(char c) {
+        return (c >= 'A' && c <= 'Z'); || (c >= 'a' && c <= 'z') || c == '_';
+    }
+
+    private bool isAlphaNumeric(char c) {
+        return isAlpha(c) || isDigit(c);
+    }
+
     private char Advance() {
         return source[current++];
+    }
+
+    private bool isDigit(char c) {
+        return c >= '0' && c <= '9';
+    }
+
+    private void m_identifier() {
+        while (isAlpha(peek())) Advance();
+
+        string text = source.Substring(start, current);
+        TokenType type = keywords[text.ToLower()];
+        if (type == null) type = IDENTIFIER;
+        AddToken(type);
     }
 
     private void AddToken(TokenType type) {
         AddToken(type, null);
     }
 
-    private void AddToken (TokenType type, object literal) {
+    private void AddToken(TokenType type, object literal) {
         string text = source.Substring(start, current);
         tokens.Add(new Token(type, text, literal, line));
     }
+
+     
+
 }
