@@ -1,3 +1,5 @@
-/csharp-lox/obj
-/csharp-lox/bin
-/csharp-lox/.vs
+/csharp-lox/.vs/
+/csharp-lox/csharp-lox/obj/
+/csharp-lox/csharp-lox/bin/
+/csharp-lox/lox-tool/obj/
+/csharp-lox/lox-tool/bin/

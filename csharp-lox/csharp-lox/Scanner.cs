@@ -153,7 +153,7 @@ public class Scanner {
     }
 
     private bool isAlpha(char c) {
-        return (c >= 'A' && c <= 'Z'); || (c >= 'a' && c <= 'z') || c == '_';
+        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_';
     }
 
     private bool isAlphaNumeric(char c) {

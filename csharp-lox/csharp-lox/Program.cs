@@ -43,7 +43,6 @@ class Program
     private static void run(string source) {
         List<string> tokens = source.Split(' ').ToList();
 
-
         foreach (string token in tokens) {
             Console.WriteLine($"{token}");
         }
