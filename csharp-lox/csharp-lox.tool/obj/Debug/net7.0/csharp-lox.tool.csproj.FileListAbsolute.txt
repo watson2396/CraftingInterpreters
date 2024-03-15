@@ -1,0 +1,15 @@
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\csharp-lox.tool.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\csharp-lox.tool.AssemblyInfoInputs.cache
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\csharp-lox.tool.AssemblyInfo.cs
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\csharp-lox.tool.csproj.CoreCompileInputs.cache
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\csharp-lox.tool.sourcelink.json
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\bin\Debug\net7.0\csharp-lox.tool.exe
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\bin\Debug\net7.0\csharp-lox.tool.deps.json
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\bin\Debug\net7.0\csharp-lox.tool.runtimeconfig.json
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\bin\Debug\net7.0\csharp-lox.tool.dll
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\bin\Debug\net7.0\csharp-lox.tool.pdb
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\csharp-lox.tool.dll
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\refint\csharp-lox.tool.dll
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\csharp-lox.tool.pdb
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\csharp-lox.tool.genruntimeconfig.cache
+C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\csharp-lox.tool\obj\Debug\net7.0\ref\csharp-lox.tool.dll
