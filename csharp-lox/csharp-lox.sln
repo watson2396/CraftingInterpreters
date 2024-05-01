@@ -5,7 +5,10 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csharp-lox", "csharp-lox\csharp-lox.csproj", "{9A4B18EB-47F6-43B4-86BD-5A0AAC93F756}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-lox.tool", "csharp-lox.tool\csharp-lox.tool.csproj", "{4B552326-B057-40BC-9BC7-5362191F9585}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csharp-lox.tool", "csharp-lox.tool\csharp-lox.tool.csproj", "{4B552326-B057-40BC-9BC7-5362191F9585}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A4B18EB-47F6-43B4-86BD-5A0AAC93F756} = {9A4B18EB-47F6-43B4-86BD-5A0AAC93F756}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

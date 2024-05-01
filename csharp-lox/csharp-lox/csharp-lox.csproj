@@ -13,11 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EditorConfigFiles Remove="C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="C:\Users\jwatson\source\personal\CraftingInterpreters\csharp-lox\.editorconfig" />
+    <None Include="C:\repos\personal\CraftingInterpreters\csharp-lox\.editorconfig" />
   </ItemGroup>
 
 </Project>

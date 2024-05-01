@@ -1,4 +1,8 @@
 
+## Goal
+
+Make a working Lox interpreter or die trying.
+
 ## Project setup
 
 1. create app `dotnet new console --framework net7.0 --use-program-main true`
