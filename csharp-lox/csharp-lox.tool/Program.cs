@@ -35,7 +35,7 @@ class Program {
         Console.WriteLine($"{path} exists");
 
         using (StreamWriter sw = new StreamWriter(path)) {
-            sw.WriteLine("namespace csharp_lox.tool;");
+            sw.WriteLine("namespace csharp_lox;");
             sw.WriteLine("");
             sw.WriteLine("abstract class " + baseName + " {");
             DefineVisitor(sw, baseName, types);

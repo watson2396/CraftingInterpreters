@@ -1,6 +1,6 @@
-namespace csharp_lox.tool;
+namespace csharp_lox;
 
-abstract class Expr
+public abstract class Expr
 {
     public interface Visitor<T>
     {
@@ -13,7 +13,7 @@ abstract class Expr
     public abstract void Accept(Visitor<Expr> visitor);
 }
 
-class Binary : Expr
+public class Binary : Expr
 {
     Binary(Expr left, Token opr, Expr right)
     {
@@ -32,7 +32,7 @@ class Binary : Expr
     static Expr right;
 }
 
-class Grouping : Expr
+public class Grouping : Expr
 {
     Grouping(Expr expression)
     {
@@ -47,7 +47,7 @@ class Grouping : Expr
     static Expr expression;
 }
 
-class Literal : Expr
+public class Literal : Expr
 {
     Literal(Object value)
     {
@@ -62,7 +62,7 @@ class Literal : Expr
     static Object value;
 }
 
-class Unary : Expr
+public class Unary : Expr
 {
     Unary(Token opr, Expr right)
     {

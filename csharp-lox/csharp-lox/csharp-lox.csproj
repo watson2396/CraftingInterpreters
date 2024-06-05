@@ -16,4 +16,8 @@
     <None Include="C:\repos\personal\CraftingInterpreters\csharp-lox\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\csharp-lox.model\csharp-lox.model.csproj" />
+  </ItemGroup>
+
 </Project>
