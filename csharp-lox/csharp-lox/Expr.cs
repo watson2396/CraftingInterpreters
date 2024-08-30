@@ -1,15 +1,15 @@
 namespace csharp_lox;
 
+public interface Visitor<T>
+{
+    T visitBinaryExpr(Binary expr);
+    T visitGroupingExpr(Grouping expr);
+    T visitLiteralExpr(Literal expr);
+    T visitUnaryExpr(Unary expr);
+}
+
 public abstract class Expr
 {
-    public interface Visitor<T>
-    {
-        T visitBinaryExpr(Binary expr);
-        T visitGroupingExpr(Grouping expr);
-        T visitLiteralExpr(Literal expr);
-        T visitUnaryExpr(Unary expr);
-    }
-
     public abstract void Accept(Visitor<Expr> visitor);
 }
 

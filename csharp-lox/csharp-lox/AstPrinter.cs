@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace csharp_lox;
 
-public class AstPrinter : Expr.Visitor<string>
+public class AstPrinter implements Expr.Visitor<string>
 {
     string Print(Expr expr)
     {
@@ -15,35 +10,35 @@ public class AstPrinter : Expr.Visitor<string>
     }
 
     public override string visitBinaryExpr(Binary expr)
-    {
-        return parenthesize(expr.operator.lexeme, expr.left, expr.right);
-    }
+{
+    return parenthesize(expr.operator.lexeme, expr.left, expr.right);
+}
 
-    public override string visitGroupingExpr(Grouping expr)
-    {
-        return parenthesize(expr.operator.lexeme, expr.left, expr.right);
-    }
+public override string visitGroupingExpr(Grouping expr)
+{
+    return parenthesize(expr.operator.lexeme, expr.left, expr.right);
+}
 
-    public override string visitLiteralExpr(Literal expr)
-    {
-        return parenthesize(expr.operator.lexeme, expr.left, expr.right);
-    }
+public override string visitLiteralExpr(Literal expr)
+{
+    return parenthesize(expr.operator.lexeme, expr.left, expr.right);
+}
 
-    public override string visitUnaryexpr(Unary expr)
-    {
-        return parenthesize(expr.operator.lexeme, expr.left, expr.right);
-    }
+public override string visitUnaryexpr(Unary expr)
+{
+    return parenthesize(expr.operator.lexeme, expr.left, expr.right);
+}
 
-    private string parenthesize(string name, Expr[] exprs)
-    {
-        StringBuilder builder = new StringBuilder();
+private string parenthesize(string name, Expr[] exprs)
+{
+    StringBuilder builder = new StringBuilder();
 
-        builder.Append("(").Append(name);
-        foreach (Expr e in exprs)
-        {
-            builder.Append(" ");
-            builder.Append(expr.Accept(this));
-        }
+    builder.Append("(").Append(name);
+    foreach (Expr e in exprs)
+    {
+        builder.Append(" ");
+        builder.Append(expr.Accept(this));
     }
+}
 }
 

@@ -1,12 +1,13 @@
-﻿using csharp_lox;
-
-namespace csharp_lox.tool;
+﻿namespace csharp_lox.tool;
 
 // Generate AST
-class Program {
-    public static void Main(string[] args) {
+class Program
+{
+    public static void Main(string[] args)
+    {
 
-        if (args.Length == 0) {
+        if (args.Length == 0)
+        {
             Console.WriteLine("Please provide output directory name");
         }
 
@@ -22,9 +23,11 @@ class Program {
     }
 
 
-    private static void DefineAst(string outputDir, string baseName, List<string> types) {
+    private static void DefineAst(string outputDir, string baseName, List<string> types)
+    {
         string path = outputDir + '/' + baseName + ".cs";
-        if (!Directory.Exists(outputDir)) {
+        if (!Directory.Exists(outputDir))
+        {
             Directory.CreateDirectory(outputDir);
             Console.WriteLine($"{outputDir} created");
         }
@@ -34,7 +37,8 @@ class Program {
         }
         Console.WriteLine($"{path} exists");
 
-        using (StreamWriter sw = new StreamWriter(path)) {
+        using (StreamWriter sw = new StreamWriter(path))
+        {
             sw.WriteLine("namespace csharp_lox;");
             sw.WriteLine("");
             sw.WriteLine("abstract class " + baseName + " {");
@@ -44,7 +48,8 @@ class Program {
             sw.WriteLine("");
 
 
-            foreach (string type in types) {
+            foreach (string type in types)
+            {
                 string className = type.Split(":")[0].Trim();
                 string fields = type.Split(":")[1].Trim();
                 DefineType(sw, baseName, className, fields);
@@ -54,7 +59,8 @@ class Program {
     }
 
     private static void DefineType(
-     StreamWriter sw, string baseName, string className, string fieldList) {
+     StreamWriter sw, string baseName, string className, string fieldList)
+    {
         sw.WriteLine("class " + className + " : " + baseName + " {");
 
         // Constructor
@@ -62,7 +68,8 @@ class Program {
 
         // Store parameters in fields
         string[] fields = fieldList.Split(",");
-        foreach (string field in fields) {
+        foreach (string field in fields)
+        {
             string name = field.Split(" ")[1];
             sw.WriteLine("\t\t" + className + "." + name + " = " + name + ";");
         }
@@ -76,7 +83,8 @@ class Program {
 
         // Fields
         sw.WriteLine("");
-        foreach (string field in fields) {
+        foreach (string field in fields)
+        {
             sw.WriteLine("\tstatic " + field + ";");
         }
 
@@ -84,7 +92,7 @@ class Program {
         sw.WriteLine("");
     }
 
-    private static void DefineVisitor (StreamWriter sw, string baseName, List<string> types)
+    private static void DefineVisitor(StreamWriter sw, string baseName, List<string> types)
     {
         sw.WriteLine("public interface Visitor<T> {");
         foreach (string type in types)
