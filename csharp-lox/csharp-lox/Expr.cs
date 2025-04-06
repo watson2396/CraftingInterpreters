@@ -2,10 +2,10 @@ namespace csharp_lox;
 
 public interface Visitor<T>
 {
-    T visitBinaryExpr(Binary expr);
-    T visitGroupingExpr(Grouping expr);
-    T visitLiteralExpr(Literal expr);
-    T visitUnaryExpr(Unary expr);
+    T VisitBinaryExpr(Binary expr);
+    T VisitGroupingExpr(Grouping expr);
+    T VisitLiteralExpr(Literal expr);
+    T VisitUnaryExpr(Unary expr);
 }
 
 public abstract class Expr
@@ -24,7 +24,7 @@ public class Binary : Expr
 
     public override void Accept(Visitor<Expr> visitor)
     {
-        visitor.visitBinaryExpr(this);
+        visitor.VisitBinaryExpr(this);
     }
 
     static Expr left;
@@ -41,7 +41,7 @@ public class Grouping : Expr
 
     public override void Accept(Visitor<Expr> visitor)
     {
-        visitor.visitGroupingExpr(this);
+        visitor.VisitGroupingExpr(this);
     }
 
     static Expr expression;
@@ -56,7 +56,7 @@ public class Literal : Expr
 
     public override void Accept(Visitor<Expr> visitor)
     {
-        visitor.visitLiteralExpr(this);
+        visitor.VisitLiteralExpr(this);
     }
 
     static Object value;
@@ -72,7 +72,7 @@ public class Unary : Expr
 
     public override void Accept(Visitor<Expr> visitor)
     {
-        visitor.visitUnaryExpr(this);
+        visitor.VisitUnaryExpr(this);
     }
 
     static Token opr;

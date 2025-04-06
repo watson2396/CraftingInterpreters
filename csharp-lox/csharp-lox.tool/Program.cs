@@ -22,7 +22,6 @@ class Program
         DefineAst(outputDir, "Expr", strings);
     }
 
-
     private static void DefineAst(string outputDir, string baseName, List<string> types)
     {
         string path = outputDir + '/' + baseName + ".cs";
@@ -58,8 +57,7 @@ class Program
         }
     }
 
-    private static void DefineType(
-     StreamWriter sw, string baseName, string className, string fieldList)
+    private static void DefineType(StreamWriter sw, string baseName, string className, string fieldList)
     {
         sw.WriteLine("class " + className + " : " + baseName + " {");
 
