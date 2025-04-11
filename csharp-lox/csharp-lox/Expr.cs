@@ -18,7 +18,7 @@ public abstract class Expr
         public Token opr;
         public Expr right;
 
-        Binary(Expr left, Token opr, Expr right)
+        public Binary(Expr left, Token opr, Expr right)
         {
             this.left = left;
             this.opr = opr;
@@ -33,7 +33,7 @@ public abstract class Expr
 
     public class Grouping : Expr
     {
-        Grouping(Expr expression)
+        public Grouping(Expr expression)
         {
             this.expression = expression;
         }
@@ -48,7 +48,7 @@ public abstract class Expr
 
     public class Literal : Expr
     {
-        Literal(Object value)
+        public Literal(Object value)
         {
             this.value = value;
         }
@@ -63,7 +63,7 @@ public abstract class Expr
 
     public class Unary : Expr
     {
-        Unary(Token opr, Expr right)
+        public Unary(Token opr, Expr right)
         {
             this.opr = opr;
             this.right = right;
