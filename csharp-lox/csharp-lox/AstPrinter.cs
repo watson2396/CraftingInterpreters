@@ -2,43 +2,51 @@
 
 namespace csharp_lox;
 
-public class AstPrinter implements Expr.Visitor<string>
+public class AstPrinter : Expr.Visitor<string>
 {
-    string Print(Expr expr)
+    public string print(Expr expr)
     {
         return expr.Accept(this);
     }
 
-    public override string visitBinaryExpr(Binary expr)
-{
-    return parenthesize(expr.operator.lexeme, expr.left, expr.right);
-}
-
-public override string visitGroupingExpr(Grouping expr)
-{
-    return parenthesize(expr.operator.lexeme, expr.left, expr.right);
-}
-
-public override string visitLiteralExpr(Literal expr)
-{
-    return parenthesize(expr.operator.lexeme, expr.left, expr.right);
-}
-
-public override string visitUnaryexpr(Unary expr)
-{
-    return parenthesize(expr.operator.lexeme, expr.left, expr.right);
-}
-
-private string parenthesize(string name, Expr[] exprs)
-{
-    StringBuilder builder = new StringBuilder();
-
-    builder.Append("(").Append(name);
-    foreach (Expr e in exprs)
+    public string VisitGroupingExpr(Expr.Grouping expr)
     {
-        builder.Append(" ");
-        builder.Append(expr.Accept(this));
+        return parenthesize("group", expr.expression);
     }
-}
+
+    public string VisitBinaryExpr(Expr.Binary expr)
+    {
+        return parenthesize(expr.opr.lexeme, expr.left, expr.right);
+
+    }
+
+    public string VisitLiteralExpr(Expr.Literal expr)
+    {
+        if (expr.value == null) return "nil";
+        return expr.value.ToString()!;
+    }
+
+    public string VisitUnaryExpr(Expr.Unary expr)
+    {
+        return parenthesize(expr.opr.lexeme, expr.right);
+
+    }
+
+    private string parenthesize(string name, params Expr[] exprs)
+    {
+        StringBuilder builder = new StringBuilder();
+
+        builder.Append("(").Append(name);
+        foreach (var expr in exprs.ToList())
+        {
+            builder.Append(" ");
+            builder.Append(expr.Accept(this));
+        }
+
+        builder.Append(")");
+
+        return builder.ToString();
+    }
+
 }
 
