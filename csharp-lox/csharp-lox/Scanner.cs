@@ -185,7 +185,4 @@ public class Scanner {
         string text = source.Substring(start, current);
         tokens.Add(new Token(type, text, literal, line));
     }
-
-     
-
 }
