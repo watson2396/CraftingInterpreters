@@ -1,31 +1,24 @@
-SRC_DIR := src
-OBJ_DIR := obj
-BIN_DIR := bin
-INC_DIR := bin
+CC = clang
+CFLAGS = -Wall -Wextra -g -std=c11
+TARGET = output/clox
 
-EXE := $(BIN_DIR)/clox
-INC := $(wildcard $(INC_DIR)/*.h)
-SRC := $(wildcard $(SRC_DIR)/*.c)
-OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRC_DIR = src
+BUILD_DIR = output/build
 
-CFLAGS   := -Wall -I$(INC_DIR)
-LDFLAGS  := -Llib
-LDLIBS   := -lm
+HDRS = $(wildcard $(SRC_DIR)/*.h)
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
 
-.PHONY: all clean
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
-all: $(EXE)
-
-$(EXE): $(OBJ) | $(BIN_DIR)
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BIN_DIR) $(OBJ_DIR):
-	mkdir -p $@
+$(BUILD_DIR):
+	mddir -p (BUILD_DIR)
 
+.PHONY: clean
 clean:
-	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
-
--include $(OBJ:.o=.d)
+	rm -rf $(BUILD_DIR) 
+	rm -f $(TARGET)

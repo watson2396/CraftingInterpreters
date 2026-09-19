@@ -1,0 +1,17 @@
+[
+  {
+    "file": "src/main.c",
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-std=c11",
+      "-o",
+      "build/clox",
+      "src/main.c"
+    ],
+    "directory": "/home/makuku/repos/personal/CraftingInterpreters/cLox",
+    "output": "build/clox"
+  }
+]

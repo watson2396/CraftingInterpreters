@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "../include/debug.h"
-#include "../include/value.h"
+#include "debug.h"
+#include "value.h"
 
 static int simpleInstruction(const char *name, int offset) 
 {
@@ -13,7 +13,8 @@ void disassembleChunk(Chunk *chunk, const char *name)
 {
   printf("== %s ==\n", name);
 
-  for (int offset = 0; offset < chunk->count;) {
+  for (int offset = 0; offset < chunk->count;) 
+  {
     offset = disassembleInstruction(chunk, offset);
   }
 }
