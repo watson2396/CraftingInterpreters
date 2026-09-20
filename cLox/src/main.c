@@ -3,21 +3,31 @@
 #include "chunk.h"
 #include "common.h"
 #include "debug.h"
+#include "vm.h"
 
-int main(int argc, const char *argv[]) 
+int main(int argc, const char *argv[])
 {
-  printf("arg count: %d", argc);
-  printf("arg input: %s", argv[1]);
+    printf("arg count: %d\n", argc);
+    for (int i = 0; i < argc; i++)
+    {
+        printf("arg input: %s\n", argv[i]);
+    }
 
-  Chunk chunk;
-  initChunk(&chunk);
-  
-  int constant = addConstant(&chunk, 1.2);
-  writeChunk(&chunk, OP_CONSTANT, 123);
-  writeChunk(&chunk, constant, 123);
-  writeChunk(&chunk, OP_RETURN, 123);
+    initVM();
 
-  disassembleChunk(&chunk, "test chunk");
-  freeChunk(&chunk);
-  return 0;
+    Chunk chunk;
+    initChunk(&chunk);
+
+    int constant = addConstant(&chunk, 1.2);
+    writeChunk(&chunk, constant, 123);
+    writeChunk(&chunk, OP_CONSTANT, 123);
+    writeChunk(&chunk, OP_NEGATE, 123);
+
+    writeChunk(&chunk, OP_RETURN, 123);
+
+    disassembleChunk(&chunk, "test chunk");
+    interpret(&chunk);
+    freeVM();
+    freeChunk(&chunk);
+    return 0;
 }

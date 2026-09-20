@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "debug.h"
+#include "chunk.h"
 #include "value.h"
 
 static int simpleInstruction(const char *name, int offset) 
@@ -42,7 +43,9 @@ int disassembleInstruction(Chunk *chunk, int offset)
 	uint8_t instruction = chunk->code[offset];
 	switch (instruction) {
 			case OP_CONSTANT:
-				return constantInstruction("op_constant", chunk, offset);
+				return constantInstruction("OP_CONSTANT", chunk, offset);
+			case OP_NEGATE:
+				return simpleInstruction("OP_NEGATE", offset);
 			case OP_RETURN:
 				return simpleInstruction("OP_RETURN", offset);
 			default:
