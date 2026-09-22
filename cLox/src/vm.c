@@ -2,26 +2,35 @@
 
 #include "chunk.h"
 #include "common.h"
+#include "compiler.h"
 #include "debug.h"
+#include "memory.h"
+#include "value.h"
 #include "vm.h"
 
 VM vm;
 
-static void resetStack() { vm.stackTop = vm.stack; }
+static void resetStack() { vm.stackTop = vm.stack.values; }
 
-void initVM() { resetStack(); }
+void initVM()
+{
+    initValueArray(&vm.stack);
 
-void freeVM() {}
+    resetStack();
+}
+
+void freeVM() { initValueArray(&vm.stack); }
 
 void push(Value value)
 {
-    *vm.stackTop = value;
-    vm.stackTop++;
+    writeValueArray(&vm.stack, value);
+    vm.stackTop = &vm.stack.values[vm.stack.count];
 }
 
 Value pop()
 {
-    vm.stackTop--;
+    popValueArray(&vm.stack);
+    vm.stackTop = &vm.stack.values[vm.stack.count];
     return *vm.stackTop;
 }
 
@@ -29,12 +38,19 @@ static InterpretResult run()
 {
 #define READ_BYTE() (*vm.ip++)
 #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
+#define BINARY_OP(op)                                                          \
+    do                                                                         \
+    {                                                                          \
+        double b = pop();                                                      \
+        double a = pop();                                                      \
+        push(a op b);                                                          \
+    } while (false)
 
     for (;;)
     {
 #ifdef DEBUG_TRACE_EXECUTION
         printf("        ");
-        for (Value *slot = vm.stack; slot < vm.stackTop; slot++)
+        for (Value *slot = vm.stack.values; slot < vm.stackTop; slot++)
         {
             printf("[ ");
             printValue(*slot);
@@ -53,9 +69,29 @@ static InterpretResult run()
                 push(constant);
                 break;
             }
+            case OP_ADD:
+            {
+                BINARY_OP(+);
+                break;
+            }
+            case OP_SUBTRACT:
+            {
+                BINARY_OP(-);
+                break;
+            }
+            case OP_MULTIPLY:
+            {
+                BINARY_OP(*);
+                break;
+            }
+            case OP_DIVIDE:
+            {
+                BINARY_OP(/);
+                break;
+            }
             case OP_NEGATE:
             {
-                push(-pop());
+                *vm.stackTop = -(*vm.stackTop);
                 break;
             }
             case OP_RETURN:
@@ -69,11 +105,11 @@ static InterpretResult run()
 
 #undef READ_BYTE
 #undef READ_CONSTANT
+#undef BINARY_OP
 }
 
 InterpretResult interpret(Chunk *chunk)
 {
-    vm.chunk = chunk;
-    vm.ip = vm.chunk->code;
-    return run();
+    compile(source);
+    return INTERPRET_OK;
 }
