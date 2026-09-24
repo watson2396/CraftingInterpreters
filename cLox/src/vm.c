@@ -29,8 +29,7 @@ void push(Value value)
 
 Value pop()
 {
-    popValueArray(&vm.stack);
-    vm.stackTop = &vm.stack.values[vm.stack.count];
+    vm.stackTop = popValueArray(&vm.stack);
     return *vm.stackTop;
 }
 
@@ -91,7 +90,7 @@ static InterpretResult run()
             }
             case OP_NEGATE:
             {
-                *vm.stackTop = -(*vm.stackTop);
+                vm.stackTop[-1] = -(vm.stackTop[-1]);
                 break;
             }
             case OP_RETURN:

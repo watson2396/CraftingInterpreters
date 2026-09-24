@@ -30,9 +30,10 @@ void freeValueArray(ValueArray *array)
     initValueArray(array);
 }
 
-void popValueArray(ValueArray *array) 
+Value* popValueArray(ValueArray *array) 
 {
     array->count--;
+    return &array->values[array->count];
 }
 
 void printValue(Value value) { printf("%g", value); }
